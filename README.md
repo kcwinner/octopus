@@ -12,11 +12,11 @@ Octopus is a command line utility written in Go. Octopus is a replacement for Oc
 You can install Go and build Octopus.
 
 ### Flags
---help - Returns help information for Octopus
---debug - Turns on debug logging
---server - Base server url for example https://octopus.builds.com
---apikey - API Key to connect to the server
---formvalues=KEY:VALUE - Form values that need passed in for a deployment. This flag can be passed in multiple times for multiple values
+* --help - Returns help information for Octopus
+* --debug - Turns on debug logging
+* --server - Base server url for example https://octopus.builds.com
+* --apikey - API Key to connect to the server
+* --formvalues=KEY:VALUE - Form values that need passed in for a deployment. This flag can be passed in multiple times for multiple values
 
 ## Commands
 
