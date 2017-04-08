@@ -12,6 +12,7 @@ func (octopus *OctopusClient) PromoteRelease(projectName, from, to string, formV
 	if octopus.Debug {
 		log.Println("Getting current release for Environment and project")
 	}
+
 	release, project, _, err := octopus.GetCurrentReleaseForEnvironmentProject(projectName, from)
 	if err != nil {
 		return err
@@ -20,6 +21,23 @@ func (octopus *OctopusClient) PromoteRelease(projectName, from, to string, formV
 	environment, err := octopus.GetEnvironment(to)
 	if err != nil {
 		return err
+	}
+
+	if len(formValues) > 0 {
+		namedValues, err := octopus.getFormValuesForRelease(release.ID, environment.ID)
+		if err != nil {
+			return err
+		}
+
+		deployVals := make(map[string]string)
+		for key, val := range namedValues {
+			_, ok := formValues[key]
+			if ok {
+				deployVals[val] = formValues[key]
+			}
+		}
+
+		formValues = deployVals
 	}
 
 	deployment := models.Deployment{
@@ -51,5 +69,4 @@ func (octopus *OctopusClient) PromoteRelease(projectName, from, to string, formV
 	log.Println(string(body))
 
 	return nil
-
 }

@@ -26,6 +26,8 @@ var (
 )
 
 func main() {
+	log.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
+
 	val, err := app.Parse(os.Args[1:])
 	if err != nil {
 		panic(err)
